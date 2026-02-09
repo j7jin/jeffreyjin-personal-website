@@ -15,7 +15,7 @@
       <!-- Hero Section -->
       <section class="hero">
         <div class="hero-text">
-          <h1><span class="wave">&#x1F44B;</span> Nice to meet you, I'm <span class="name-highlight">Jeffrey</span></h1>
+          <h1><span class="wave">&#x1F44B;</span> Nice to meet you, I'm <span class="name-highlight" id="name-jeffrey">Jeffrey</span></h1>
           <div class="subtitle">CS @ University of Waterloo &nbsp;|&nbsp; CEO &amp; Co-Founder @ Andromeda</div>
           <div class="social-links">
             <a href="https://github.com/j7jin" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -135,5 +135,28 @@
       <p class="updated">Last updated: February 2026</p>
     </footer>
   </div>
+
+  <script>
+    // Split "Jeffrey" into individual letter spans for ripple animation
+    const nameEl = document.getElementById('name-jeffrey');
+    const text = nameEl.textContent;
+    nameEl.textContent = '';
+    text.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.className = 'ripple-letter';
+      span.style.animationDelay = (i * 0.12) + 's';
+      nameEl.appendChild(span);
+    });
+
+    // Trigger ripple on hover
+    nameEl.addEventListener('mouseenter', () => {
+      nameEl.querySelectorAll('.ripple-letter').forEach(letter => {
+        letter.classList.remove('ripple-active');
+        void letter.offsetWidth; // force reflow
+        letter.classList.add('ripple-active');
+      });
+    });
+  </script>
 </body>
 </html>
